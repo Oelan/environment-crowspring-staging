@@ -12,3 +12,19 @@ cleanup:
   Annotations:
     helm.sh/hook: pre-delete
     helm.sh/hook-delete-policy: hook-succeeded
+expose:
+  config:
+    domain: 40.112.51.30.nip.io
+    exposer: Ingress
+    http: "true"
+  Annotations:
+    helm.sh/hook: post-install,post-upgrade
+    helm.sh/hook-delete-policy: hook-succeeded
+jenkins:
+  Servers:
+    Global:
+      EnvVars:
+        DOCKER_REGISTRY: snaptwilight.azurecr.io
+        TILLER_NAMESPACE: kube-system
+PipelineSecrets:
+  DockerConfig: '{"auths":{"snaptwilight.azurecr.io":{"auth":"c25hcHR3aWxpZ2h0OmR6aUV4bDhqWDBMV25OckxYUjhXTWhld1Z3NkpaanI9"}}}'
